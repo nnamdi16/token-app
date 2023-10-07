@@ -1,13 +1,13 @@
-package com.nnamdi.tokenapp;
+package com.nnamdi.validator;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class TokenAppApplication {
+public class ValidatorApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(TokenAppApplication.class, args);
+		SpringApplication.run(ValidatorApplication.class, args);
 	}
 
 }
