@@ -12,28 +12,15 @@
 	<artifactId>token-app</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>token-app</name>
+	<packaging>pom</packaging>
 	<description>A web-based application that allows you to generate tokens and validate them</description>
 	<properties>
 		<java.version>17</java.version>
 	</properties>
-	<dependencies>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-devtools</artifactId>
-			<scope>runtime</scope>
-			<optional>true</optional>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-	</dependencies>
+	<modules>
+		<module>validator</module>
+		<module>generator</module>
+	</modules>
 
 	<build>
 		<plugins>
