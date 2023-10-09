@@ -1,6 +1,5 @@
-package com.nnamdi.generator.utils;
+package com.nnamdi.validator.utils;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -8,6 +7,7 @@ import org.springframework.stereotype.Component;
 @Component
 @Getter
 public class PropertySourceResolver {
+
     @Value("${project.version}")
     private String projectVersion;
 
