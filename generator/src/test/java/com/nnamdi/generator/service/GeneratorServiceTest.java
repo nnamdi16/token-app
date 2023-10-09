@@ -13,7 +13,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 @Slf4j
-public class GeneratorServiceTest {
+class GeneratorServiceTest {
 
     @Mock
     private GeneratorService generatorService;
@@ -32,7 +32,7 @@ public class GeneratorServiceTest {
         final  var token = generatorService.generateToken(generateTokenRequestDto.getPin());
         System.out.println(token);
         assertThat(token).isNotNull();
-        assertThat(token.length()).isEqualTo(19);
+        assertThat(token).hasSize(19);
 
     }
 
