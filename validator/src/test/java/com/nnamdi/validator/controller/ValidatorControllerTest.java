@@ -68,7 +68,7 @@ class ValidatorControllerTest {
 
     ValidateTokenRequestDto requestDto() {
         return  ValidateTokenRequestDto.builder()
-                .token("9472-2990-4294-2274")
+                .token("7449-3497-7748-3772")
                 .build();
     }
 
