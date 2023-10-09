@@ -1,14 +1,19 @@
 package com.nnamdi.generator.services.impl;
 
+import com.nnamdi.generator.exceptions.BadRequestException;
 import com.nnamdi.generator.services.GeneratorService;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
 
 import java.util.Random;
 
+@Service
+@Slf4j
 public class GeneratorServiceImpl implements GeneratorService {
     @Override
     public String generateToken(String pin) {
      if (!pin.matches("[0-9]+")) {
-         throw new IllegalArgumentException("Allowed digits must contain only numbers");
+         throw new BadRequestException("pin must contain only numbers");
      }
 
      StringBuilder tokenBuilder = new StringBuilder();
