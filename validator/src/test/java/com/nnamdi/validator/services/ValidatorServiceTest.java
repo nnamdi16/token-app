@@ -25,8 +25,7 @@ class ValidatorServiceTest {
 
     @Test
     void testToValidateValidToken() {
-//        String token = "9472-2990-4294-2274";
-        String token = "2049-4094-0209-7040";
+        String token = "7449-3497-7748-3772";
         final  var isValidToken = validatorService.validateToken(token);
         assertThat(isValidToken).isTrue();
     }
