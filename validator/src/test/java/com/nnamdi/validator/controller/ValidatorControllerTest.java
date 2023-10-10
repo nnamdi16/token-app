@@ -54,10 +54,9 @@ class ValidatorControllerTest {
     void validateToken() {
         when(validatorService.validateToken(anyString())).thenReturn(true);
         try {
-            String URL = BASE_API_PATH + VALIDATOR;
+            String URL = BASE_API_PATH + VALIDATOR + "/" + requestDto().getToken();
             mockMvc.perform(
                     get(URL)
-                            .param("token", requestDto().getToken())
                             .contentType(MediaType.APPLICATION_JSON))
                     .andExpect(status().isOk())
                     .andDo(print());
