@@ -1,6 +1,6 @@
 package com.nnamdi.generator.services;
 
 public interface GeneratorService {
-    public String generateToken(String pin);
+    String generateToken(String pin);
 
 }
