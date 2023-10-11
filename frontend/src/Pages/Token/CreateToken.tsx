@@ -7,7 +7,6 @@ import { generateToken } from "../../services/token.service";
 import Button from "../../components/Button";
 
 
-document.title = "Generate Token"
 const CreateToken = () => {
   const [token, setToken] = useState<string | undefined>(undefined);
   const [generatedToken, setgeneratedToken] = useState<string | undefined>(undefined);
