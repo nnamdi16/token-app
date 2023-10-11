@@ -1,25 +1,42 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
+import { ToastContainer } from 'react-toastify';
+
+import CreateToken from './Pages/Token/CreateToken';
+import ValidateToken from './Pages/Token/ValidateToken';
+import 'react-toastify/dist/ReactToastify.css';
+
 import './App.css';
 
+const tokenTabArr = ["Create Token", "Validate Token"] as const;
+type tabs = typeof tokenTabArr[number];
 function App() {
+  const [activeTab, setActiveTab] = useState<tabs>("Create Token");
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <div className="App">
+        {tokenTabArr.map((tab) => {
+          return (
+            <section
+              className={tab===activeTab ? "active":"tabs"}
+              key={tab}
+              onClick={() => setActiveTab(tab)}
+            >
+              {tab}
+            </section>
+          );
+        })}
+      </div>
+
+      <div className="body">
+        {activeTab === "Create Token" && (
+            <CreateToken />
+        )}
+        {activeTab === "Validate Token" && (
+            <ValidateToken />
+        )}
+      </div>
+      <ToastContainer/>
+    </>
   );
 }
 
