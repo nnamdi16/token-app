@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@testing-library/user-event": "^13.5.0",
+    "@testing-library/user-event": "^14.5.1",
     "@types/node": "^16.18.58",
     "@types/react": "^18.2.25",
     "@types/react-dom": "^18.2.11",
@@ -46,7 +46,7 @@
     "@types/jest": "^29.5.5",
     "@types/react-toastify": "^4.1.0",
     "axios": "^1.5.1",
-    "jest": "^29.7.0",
+    "react-test-renderer": "^18.2.0",
     "react-toastify": "^9.1.3"
   }
 }
