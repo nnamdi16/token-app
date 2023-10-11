@@ -25,7 +25,7 @@ public class GeneratorController {
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     public ResponseEntity<AppResponse> generateToken(@RequestBody @Valid GenerateTokenRequestDto requestDto){
-        AppResponse response = AppUtil.buildAppResponse(APIResponseMessages.SUCCESSFUL, true, generatorService.tokenGenerator(requestDto.getPin(), 16), null, HttpStatus.OK.value());
+        AppResponse response = AppUtil.buildAppResponse(APIResponseMessages.SUCCESSFUL, true, generatorService.generateToken(requestDto.getPin()), null, HttpStatus.OK.value());
         return  ResponseEntity.ok(response);
     }
 }
