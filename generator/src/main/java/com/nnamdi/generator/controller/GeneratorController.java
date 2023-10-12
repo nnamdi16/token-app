@@ -1,6 +1,6 @@
 package com.nnamdi.generator.controller;
 
-import com.nnamdi.generator.domain.dto.GenerateTokenRequestDto;
+import com.nnamdi.generator.domain.request.GenerateTokenRequestDto;
 import com.nnamdi.generator.domain.response.APIResponseMessages;
 import com.nnamdi.generator.domain.response.AppResponse;
 import com.nnamdi.generator.services.GeneratorService;
