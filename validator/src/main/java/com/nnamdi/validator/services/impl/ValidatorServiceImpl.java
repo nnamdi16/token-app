@@ -10,6 +10,10 @@ public class ValidatorServiceImpl implements ValidatorService {
     public boolean validateToken(String token) {
         String filteredString = token.replace("-", "");
 
+        if (filteredString.length() != 16) {
+            throw  new BadRequestException("Token is invalid");
+        }
+
         int sum = 0;
         boolean doubleDigits = false;
         for (int index = 0; index < filteredString.length(); index++) {

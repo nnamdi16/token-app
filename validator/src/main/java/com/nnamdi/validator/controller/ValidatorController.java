@@ -23,7 +23,7 @@ public class ValidatorController {
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/{token}")
-    public ResponseEntity<AppResponse> validateToken(@PathVariable("token") String token){
+    public ResponseEntity<AppResponse> validateToken(@PathVariable("token")  String token){
         AppResponse response = AppUtil.buildAppResponse(APIResponseMessages.SUCCESSFUL, true,validatorService.validateToken(token), null, HttpStatus.OK.value());
         return  ResponseEntity.ok(response);
     }
