@@ -23,35 +23,17 @@ public class GeneratorServiceImpl implements GeneratorService {
          char digit = pin.charAt(tokenIndex);
          partialTokenBuilder.append(digit);
      }
-        return generateValidLuhnToken(partialTokenBuilder.toString()).replaceAll("(.{4})(?!$)", "$1-");
-    }
+        int sum = generateValidLuhnToken(partialTokenBuilder.toString());
+        int checkSum =  (sum % 10) == 0 ? 0 : 10 - (sum % 10);
+     if (!pin.contains(String.valueOf(checkSum))) {
+          return generateToken(pin);
+     }
 
-    @Override
-    public String tokenGenerator(String pin, int tokenLength) {
-        int[] checkArray = new int[3];
-
-        var cardNum = new int[4];
-
-        for (int d = 2; d >= 0; d--)
-        {
-            cardNum[d] = random.nextInt(0, 9);
-            checkArray[d] = ( cardNum[d] * (((d+1)%2)+1)) % 9;
-        }
-
-        cardNum[3] = ( Arrays.stream(checkArray).sum() * 9 ) % 10;
-
-        var sb = new StringBuilder();
-
-        for (int d = 0; d < 4; d++)
-        {
-            sb.append(cardNum[d]);
-        }
-        return sb.toString();
-
+        return partialTokenBuilder.insert(0, checkSum).toString().replaceAll("(.{4})(?!$)", "$1-");
     }
 
 
-    private String generateValidLuhnToken(String token) {
+    private int generateValidLuhnToken(String token) {
         int sum = 0;
         boolean doubleDigits = true;
         StringBuilder stringBuilder = new StringBuilder();
@@ -69,9 +51,7 @@ public class GeneratorServiceImpl implements GeneratorService {
             doubleDigits = !doubleDigits;
             stringBuilder.insert(0, digitChar);
         }
-        int checkSum =  (sum % 10) == 0 ? 0 : 10 - (sum % 10);
-
-        return stringBuilder.insert(0, checkSum).toString();
+        return  sum;
 
 
     }
