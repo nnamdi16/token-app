@@ -36,7 +36,6 @@ public class GeneratorServiceImpl implements GeneratorService {
     private int generateValidLuhnToken(String token) {
         int sum = 0;
         boolean doubleDigits = true;
-        StringBuilder stringBuilder = new StringBuilder();
         for (int index = token.length() -1; index >= 0; index--) {
             char digitChar = token.charAt(index);
             int unitDigit = Character.getNumericValue(digitChar);
@@ -49,7 +48,6 @@ public class GeneratorServiceImpl implements GeneratorService {
 
             sum += unitDigit;
             doubleDigits = !doubleDigits;
-            stringBuilder.insert(0, digitChar);
         }
         return  sum;
 
