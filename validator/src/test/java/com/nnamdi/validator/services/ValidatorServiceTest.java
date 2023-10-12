@@ -25,7 +25,7 @@ class ValidatorServiceTest {
 
     @Test
     void testToValidateValidToken() {
-        String token = "7449-3497-7748-3772";
+        String token = "2290-9009-2990-9099";
         final  var isValidToken = validatorService.validateToken(token);
         assertThat(isValidToken).isTrue();
     }
@@ -33,6 +33,14 @@ class ValidatorServiceTest {
     @Test
     void testToValidateInValidToken() {
         String token = "6249-4472-0279-9421";
+        assertThatThrownBy(() -> validatorService.validateToken(token))
+                .isInstanceOf(BadRequestException.class)
+                .hasMessage("Token is invalid");
+    }
+
+    @Test
+    void testToValidateTokenLessThanRequiredNumber() {
+        String token = "6249-4472-0279";
         assertThatThrownBy(() -> validatorService.validateToken(token))
                 .isInstanceOf(BadRequestException.class)
                 .hasMessage("Token is invalid");
