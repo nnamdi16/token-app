@@ -1,7 +1,7 @@
 package com.nnamdi.generator.controller;
 
 import com.google.gson.Gson;
-import com.nnamdi.generator.domain.dto.GenerateTokenRequestDto;
+import com.nnamdi.generator.domain.request.GenerateTokenRequestDto;
 import com.nnamdi.generator.exceptions.BadRequestException;
 import com.nnamdi.generator.services.GeneratorService;
 import org.junit.jupiter.api.AfterEach;
@@ -85,9 +85,32 @@ class GeneratorControllerTest {
         }
     }
 
+
+    @Test
+    void generateTokenShouldThrowWithInvalidPin() {
+        when(generatorService.generateToken(anyString())).thenThrow(BadRequestException.class);
+        try {
+            mockMvc.perform(
+                            post(URL)
+                                    .contentType(MediaType.APPLICATION_JSON)
+                                    .content(gson.toJson(badInputFormatDto())))
+                    .andExpect(status().is4xxClientError())
+                    .andDo(print());
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     GenerateTokenRequestDto requestDto () {
         return  GenerateTokenRequestDto.builder()
                 .pin("24790")
+                .build();
+    }
+
+    GenerateTokenRequestDto badInputFormatDto () {
+        return  GenerateTokenRequestDto.builder()
+                .pin("2223494944")
                 .build();
     }
 }

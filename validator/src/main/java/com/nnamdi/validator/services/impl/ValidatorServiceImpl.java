@@ -8,11 +8,16 @@ import org.springframework.stereotype.Service;
 public class ValidatorServiceImpl implements ValidatorService {
     @Override
     public boolean validateToken(String token) {
-        String reverseString = new StringBuilder(token.replace("-", "")).reverse().toString();
+        String filteredString = token.replace("-", "");
+
+        if (filteredString.length() != 16) {
+            throw  new BadRequestException("Token is invalid");
+        }
+
         int sum = 0;
         boolean doubleDigits = false;
-        for (int index = 0; index < reverseString.length(); index++) {
-            int unitDigit = Character.getNumericValue(reverseString.charAt(index));
+        for (int index = 0; index < filteredString.length(); index++) {
+            int unitDigit = Character.getNumericValue(filteredString.charAt(index));
             if (doubleDigits) {
                 unitDigit *= 2;
                 if (unitDigit > 9) {

@@ -1,7 +1,7 @@
-package com.nnamdi.generator.domain.dto;
+package com.nnamdi.generator.domain.request;
 
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.NotBlank;
+import com.nnamdi.generator.utils.ValidatePin;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,7 +17,7 @@ public class GenerateTokenRequestDto implements Serializable {
     /**
      * Assumption that the maximum number of digits are 5
      */
-    @NotBlank(message = "pin must be provided")
-    @Max(value = 5, message = "maximum number of pin should be 5 ")
+    @Size(max = 5)
+    @ValidatePin()
     private String pin;
 }

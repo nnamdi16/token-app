@@ -5,7 +5,7 @@ import com.nnamdi.generator.services.GeneratorService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.Random;
+import java.util.*;
 
 @Service
 @Slf4j
@@ -23,14 +23,19 @@ public class GeneratorServiceImpl implements GeneratorService {
          char digit = pin.charAt(tokenIndex);
          partialTokenBuilder.append(digit);
      }
-        return generateValidLuhnToken(partialTokenBuilder.toString()).replaceAll("(.{4})(?!$)", "$1-");
+        int sum = generateValidLuhnToken(partialTokenBuilder.toString());
+        int checkSum =  (sum % 10) == 0 ? 0 : 10 - (sum % 10);
+     if (!pin.contains(String.valueOf(checkSum))) {
+          return generateToken(pin);
+     }
+
+        return partialTokenBuilder.insert(0, checkSum).toString().replaceAll("(.{4})(?!$)", "$1-");
     }
 
 
-    private String generateValidLuhnToken(String token) {
+    private int generateValidLuhnToken(String token) {
         int sum = 0;
         boolean doubleDigits = true;
-        StringBuilder stringBuilder = new StringBuilder();
         for (int index = token.length() -1; index >= 0; index--) {
             char digitChar = token.charAt(index);
             int unitDigit = Character.getNumericValue(digitChar);
@@ -43,10 +48,8 @@ public class GeneratorServiceImpl implements GeneratorService {
 
             sum += unitDigit;
             doubleDigits = !doubleDigits;
-            stringBuilder.insert(0, digitChar);
         }
-        int checkSum =  (10 - (sum % 10)) % 10;
-        return stringBuilder.append(checkSum).toString();
+        return  sum;
 
 
     }
