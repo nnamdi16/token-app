@@ -1,7 +1,7 @@
 package com.nnamdi.generator.service;
 
 
-import com.nnamdi.generator.domain.dto.GenerateTokenRequestDto;import com.nnamdi.generator.exceptions.BadRequestException;
+import com.nnamdi.generator.domain.request.GenerateTokenRequestDto;import com.nnamdi.generator.exceptions.BadRequestException;
 import com.nnamdi.generator.services.GeneratorService;
 import com.nnamdi.generator.services.impl.GeneratorServiceImpl;
 import lombok.extern.slf4j.Slf4j;
@@ -31,8 +31,10 @@ class GeneratorServiceTest {
         GenerateTokenRequestDto generateTokenRequestDto = buildGenerateTokenRequestDto();
         final  var token = generatorService.generateToken(generateTokenRequestDto.getPin());
         System.out.println(token);
+        String filteredToken = token.replace("-", "");
         assertThat(token).isNotNull();
-        assertThat(token).hasSize(19);
+        assertThat(filteredToken).hasSize(16);
+        assertThat(filteredToken).containsPattern("\\d+");
 
     }
 
@@ -53,21 +55,10 @@ class GeneratorServiceTest {
                 .hasMessage("pin must contain only numbers");
     }
 
-//    @Test
-//    void testToGenerateTokenContainsPin() {
-//        GenerateTokenRequestDto generateTokenRequestDto = buildGenerateTokenRequestDto();
-//        final  var token = generatorService.generateToken(generateTokenRequestDto.getPin());
-//        System.out.println(token);
-//        System.out.println(generateTokenRequestDto.getPin());
-//        assertThat(isSubset(generateTokenRequestDto.getPin(), token)).isTrue();
-//    }
+
     GenerateTokenRequestDto buildGenerateTokenRequestDto () {
         return  GenerateTokenRequestDto.builder().pin("635951234").build();
     }
 
-//    private boolean isSubset(String subset, String pattern) {
-//        boolean data = pattern.contains(subset);
-//        System.out.println(data);
-//        return data;
-//    }
+
 }
