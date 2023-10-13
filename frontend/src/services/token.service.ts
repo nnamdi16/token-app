@@ -22,7 +22,6 @@ export const generateToken = async (token: string) => {
 }
 
 export const validateToken = async (token: string) => {
-    debugger;
     const response = await client(validateTokenUrl).get(`${urls.validate}/${token}`).then(response => {
         return response?.data as ResponseProps
     }).catch(err => {
