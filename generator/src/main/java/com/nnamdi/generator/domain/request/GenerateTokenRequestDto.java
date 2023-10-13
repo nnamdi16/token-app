@@ -17,7 +17,7 @@ public class GenerateTokenRequestDto implements Serializable {
     /**
      * Assumption that the maximum number of digits are 5
      */
-    @Size(max = 5)
+    @Size(max = 5, min = 5, message = "Pin must be 5 digits")
     @ValidatePin()
     private String pin;
 }

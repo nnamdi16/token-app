@@ -8,7 +8,7 @@ import Button from "../../components/Button";
 
 
 const CreateToken = () => {
-  const [token, setToken] = useState<string | undefined>(undefined);
+  const [token, setToken] = useState<string >('');
   const [generatedToken, setgeneratedToken] = useState<string | undefined>(undefined);
   const [isLoading, setsetIsLoading] = useState(false);
 
@@ -17,7 +17,7 @@ const CreateToken = () => {
     event?.preventDefault();
     // Use a regular expression to remove non-numeric characters
     const numericValue = event?.target.value.replace(/[^0-9]/g, '');
-    setToken(numericValue);
+    setToken(numericValue!!);
   };
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -30,7 +30,7 @@ const CreateToken = () => {
       setsetIsLoading(prev => !prev);
       const createToken = await generateToken(token.trim());
       setsetIsLoading(prev => !prev);
-      const { data, error, message, status } = createToken;
+      const { data, error, message, status } = createToken || {};
       if (!error && status === 200) {
         setgeneratedToken(data);
         setToken('');
@@ -38,7 +38,7 @@ const CreateToken = () => {
         return;
       }
       setgeneratedToken('')
-      toast.error('An error occured while generating the token');
+      message ? toast.error(message) : toast.error('An error occurred while generating the token');
       return;
     } catch (ex) {
       if (ex instanceof Error) {
@@ -46,11 +46,12 @@ const CreateToken = () => {
       }
     }
   };
+
   return (
     <section className={styles.container}>
       <form onSubmit={handleSubmit} className={styles.container}>
         <h1>Create Token </h1>
-        <Input value={token!!} onChange={handleOnchange} placeholder="Enter Token" />
+        <Input value={token} onChange={handleOnchange} placeholder="Enter pin" />
         <Button isDisabled={isLoading} text="Create Token" />
       </form>
       {generatedToken && <label>Generated Token:{generatedToken}</label>}
