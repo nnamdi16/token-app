@@ -60,7 +60,7 @@ application.properties file of each of the services while for the frontend in th
 
 
 
-### Running Test
+## Running Test
 #### Spring Boot Application
 To run the test for the spring boot application, run the command below:
 
@@ -99,13 +99,13 @@ npx jest --coverage
 ```
 To view the report you need to run the report which is an index.html file in the coverage/Icov-report folder in a browser.
 
-### Documentation
+## Documentation
 The REST endpoint for both the generator service and the validator services are documented using swagger.
 The swagger documentation UI is seen below:
 - [Generator Service - http://localhost:8081/swagger-ui/index.html](http://localhost:8081/swagger-ui/index.html)
 - [Validator Service - http://localhost:8082/swagger-ui/index.html](http://localhost:8082/swagger-ui/index.html)
 
-### Assumptions
+## Assumptions
 - The available number of digits (pin) is 5.
 - The token generated is 16 digits with the format XXXX-XXXX-XXXX-XXXX
 
