@@ -15,7 +15,7 @@ export const generateToken=async(token:string)=>{
     }).then(response=>{
         return response?.data as ResponseProps
     }).catch(err=>{
-        return err?.response?.data as any
+        return err?.response?.data
     })
 
     return response;
@@ -26,7 +26,7 @@ export const validateToken=async(token:string)=>{
     const response=await client(validateTokenUrl).get(`${urls.validate}/${token}`).then(response=>{
         return response?.data as ResponseProps
     }).catch(err=>{
-        return err
+        return err?.response?.data
     })
 
     return response;
