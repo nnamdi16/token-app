@@ -10,7 +10,7 @@ import Button from "../../components/Button";
 document.title = "Generate Token"
 const ValidateToken = () => {
   const [token, setToken] = useState<string>('');
-  const [isLoading, setsetIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleOnchange = (event?: React.ChangeEvent<HTMLInputElement>) => {
     event?.preventDefault();
@@ -26,9 +26,9 @@ const ValidateToken = () => {
     }
     //call end point
     try {
-      setsetIsLoading(prev => !prev);
+      setIsLoading(prev => !prev);
       const isTokenValid = await validateToken(token.trim());
-      setsetIsLoading(prev => !prev);
+      setIsLoading(prev => !prev);
       const { error, message, status } = isTokenValid || {};
       if (!error && status === 200) {
         setToken('');
