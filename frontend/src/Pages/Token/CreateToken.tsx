@@ -9,8 +9,8 @@ import Button from "../../components/Button";
 
 const CreateToken = () => {
   const [token, setToken] = useState<string >('');
-  const [generatedToken, setgeneratedToken] = useState<string | undefined>(undefined);
-  const [isLoading, setsetIsLoading] = useState(false);
+  const [generatedToken, setGeneratedToken] = useState<string | undefined>(undefined);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleOnchange = (event?: React.ChangeEvent<HTMLInputElement>) => {
 
@@ -27,17 +27,17 @@ const CreateToken = () => {
     }
     //call end point
     try {
-      setsetIsLoading(prev => !prev);
+      setIsLoading(prev => !prev);
       const createToken = await generateToken(token.trim());
-      setsetIsLoading(prev => !prev);
+      setIsLoading(prev => !prev);
       const { data, error, message, status } = createToken || {};
       if (!error && status === 200) {
-        setgeneratedToken(data);
+        setGeneratedToken(data);
         setToken('');
         toast.success('Token generated successfully');
         return;
       }
-      setgeneratedToken('')
+      setGeneratedToken('')
       message ? toast.error(message) : toast.error('An error occurred while generating the token');
       return;
     } catch (ex) {
