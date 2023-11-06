@@ -1,7 +1,7 @@
 import styles from "./Button.module.scss";
 import { ButtonProps } from "./types";
 
-const Button = ({ isDisabled, text,onClick }: ButtonProps) => {
+const Button = ({ isDisabled, text, onClick }: ButtonProps) => {
   return (
     <button
       disabled={isDisabled}
